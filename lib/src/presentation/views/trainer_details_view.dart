@@ -7,10 +7,10 @@ import '../../domain/entities/article.dart';
 import '../../injector.dart';
 import '../blocs/remote_articles/remote_articles_bloc.dart';
 
-class ArticleDetailsView extends HookWidget {
+class TrainerDetailsView extends HookWidget {
   final Article article;
 
-  const ArticleDetailsView({Key key, this.article}) : super(key: key);
+  const TrainerDetailsView({Key key, this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

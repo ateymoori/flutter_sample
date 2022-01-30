@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:lepaya_app/src/data/models/trainers_response_model.dart';
+import 'package:lepaya_app/src/domain/entities/trainer.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/utils/constants.dart';
@@ -7,8 +9,8 @@ import '../../models/breaking_news_response_model.dart';
 part 'news_api_service.g.dart';
 
 @RestApi(baseUrl: kBaseUrl)
-abstract class NewsApiService {
-  factory NewsApiService(Dio dio, {String baseUrl}) = _NewsApiService;
+abstract class RestApiService {
+  factory RestApiService(Dio dio, {String baseUrl}) = _NewsApiService;
 
   @GET('/top-headlines')
   Future<HttpResponse<BreakingNewsResponseModel>> getBreakingNewsArticles({
@@ -18,4 +20,11 @@ abstract class NewsApiService {
     @Query("page") int page,
     @Query("pageSize") int pageSize,
   });
+
+  @GET('https://5fb52c64e473ab0016a179a0.mockapi.io/api/v1/employee/employee')
+  Future<HttpResponse<List<TrainerResponseModel>>> getTrainersList( );
+
+
+
+
 }

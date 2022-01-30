@@ -9,8 +9,8 @@ import '../../domain/entities/article.dart';
 import '../blocs/remote_articles/remote_articles_bloc.dart';
 import '../widgets/article_widget.dart';
 
-class BreakingNewsView extends HookWidget {
-  const BreakingNewsView({Key key}) : super(key: key);
+class DashboardView extends HookWidget {
+  const DashboardView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
