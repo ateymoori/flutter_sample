@@ -1,6 +1,6 @@
 import 'package:lepaya_app/src/domain/entities/trainer.dart';
 
-import 'article_model.dart';
+
 
 class TrainerResponseModel extends Trainer {
   final String email;
@@ -14,7 +14,7 @@ class TrainerResponseModel extends Trainer {
   factory TrainerResponseModel.fromJson(Map<String, dynamic> json) {
 
     return TrainerResponseModel(
-      picture: json['email'] as String,
+      picture: json['picture'] as String,
       email: json['email'] as String,
       // totalResults: json['totalResults'] as int,
       // articles: List<ArticleModel>.from(

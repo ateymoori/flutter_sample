@@ -45,20 +45,24 @@ class _NewsApiService implements RestApiService {
 
   @override
   Future<HttpResponse<List<TrainerResponseModel>>> getTrainersList() async {
-    final _result = await _dio.request<Map<String, dynamic>>('',
-        queryParameters: null,
-        options: RequestOptions(
-            method: 'GET',
-            baseUrl:
-                "/v1/employee/employee"));
+    // final _result = await _dio.request<Map<String, dynamic>>('/v1/employee/employee',
+    //     queryParameters: null,
+    //     options: RequestOptions(
+    //         method: 'GET',
+    //         baseUrl:baseUrl));
 
-    final trainers = List<TrainerResponseModel>.from(
-      (_result.data as List<dynamic>).map(
-        (e) => TrainerResponseModel.fromJson(e as Map<String, dynamic>),
-      ),
-    );
+    Response response = await _dio.get("https://5fb52c64e473ab0016a179a0.mockapi.io/api/v1/employee/employee");
+    final trainers = (response.data as List)
+        .map((x) => TrainerResponseModel.fromJson(x))
+        .toList();
 
-    final httpResponse = HttpResponse(trainers, _result);
+    // final trainers = List<TrainerResponseModel>.from(
+    //   (_result.data as List<dynamic>).map(
+    //     (e) => TrainerResponseModel.fromJson(e as Map<String, dynamic>),
+    //   ),
+    // );
+
+    final httpResponse = HttpResponse(trainers, response);
     return httpResponse;
   }
 }
