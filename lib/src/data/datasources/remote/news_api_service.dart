@@ -21,7 +21,7 @@ abstract class RestApiService {
     @Query("pageSize") int pageSize,
   });
 
-  @GET('https://5fb52c64e473ab0016a179a0.mockapi.io/api/v1/employee/employee')
+  @GET('/v1/employee/employee')
   Future<HttpResponse<List<TrainerResponseModel>>> getTrainersList( );
 
 

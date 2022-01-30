@@ -11,6 +11,12 @@ import 'domain/repositories/articles_repository.dart';
 import 'domain/usecaes/get_articles_usecase.dart';
 import 'presentation/blocs/remote_articles/remote_articles_bloc.dart';
 
+import 'data/repositories/trainers_repository_impl.dart';
+import 'domain/repositories/trainers_repository.dart';
+import 'domain/usecaes/get_trainers_usecase.dart';
+import 'presentation/blocs/remote_trainers/remote_trainers_bloc.dart';
+
+
 final injector = GetIt.instance;
 
 Future<void> initializeDependencies() async {
@@ -37,6 +43,10 @@ Future<void> initializeDependencies() async {
   injector.registerSingleton<GetTrainersUseCase>(GetTrainersUseCase(injector()));
 
 
+  // Blocs
+  injector.registerFactory<RemoteTrainersBloc>(
+    () => RemoteTrainersBloc(injector()),
+  );
   // Blocs
   injector.registerFactory<RemoteArticlesBloc>(
     () => RemoteArticlesBloc(injector()),

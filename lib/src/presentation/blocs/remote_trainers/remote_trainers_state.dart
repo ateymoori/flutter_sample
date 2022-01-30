@@ -1,7 +1,6 @@
-part of 'remote_trainera_bloc.dart';
+part of 'remote_trainers_bloc.dart';
 
 
-import 'package:lepaya_app/src/domain/entities/trainer.dart';
 
 abstract class RemoteTrainersState extends Equatable {
   final List<Trainer> trainers;

@@ -9,7 +9,8 @@ part of 'news_api_service.dart';
 class _NewsApiService implements RestApiService {
   _NewsApiService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    baseUrl ??= 'https://newsapi.org/v2';
+    //baseUrl ??= 'https://newsapi.org/v2';
+    baseUrl ??= 'https://5fb52c64e473ab0016a179a0.mockapi.io/api';
   }
 
   final Dio _dio;
@@ -49,7 +50,7 @@ class _NewsApiService implements RestApiService {
         options: RequestOptions(
             method: 'GET',
             baseUrl:
-                "https://5fb52c64e473ab0016a179a0.mockapi.io/api/v1/employee/employee"));
+                "/v1/employee/employee"));
 
     final trainers = List<TrainerResponseModel>.from(
       (_result.data as List<dynamic>).map(

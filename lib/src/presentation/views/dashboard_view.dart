@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lepaya_app/src/domain/entities/trainer.dart';
+import 'package:lepaya_app/src/presentation/widgets/trainer_widget.dart';
 
 import '../../core/bloc/bloc_with_state.dart';
 import '../../domain/entities/article.dart';
+import '../../domain/entities/trainer.dart';
 import '../blocs/remote_articles/remote_articles_bloc.dart';
+import '../blocs/remote_trainers/remote_trainers_bloc.dart';
 import '../widgets/article_widget.dart';
+import '../widgets/trainer_widget.dart';
 
 class DashboardView extends HookWidget {
   const DashboardView({Key key}) : super(key: key);
@@ -29,7 +34,7 @@ class DashboardView extends HookWidget {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: const Text('Daily News', style: TextStyle(color: Colors.black)),
+      title: const Text('Trainers List', style: TextStyle(color: Colors.black)),
       actions: [
         Builder(
           builder: (context) => GestureDetector(
@@ -46,16 +51,16 @@ class DashboardView extends HookWidget {
 
   Widget _buildBody(ScrollController scrollController) {
     // return _buildArticle(scrollController);
-    return BlocBuilder<RemoteArticlesBloc, RemoteArticlesState>(
+    return BlocBuilder<RemoteTrainersBloc, RemoteTrainersState>(
       builder: (_, state) {
-        if (state is RemoteArticlesLoading) {
+        if (state is RemoteTrainersLoading) {
           return const Center(child: CupertinoActivityIndicator());
         }
-        if (state is RemoteArticlesError) {
+        if (state is RemoteTrainersError) {
           return const Center(child: Icon(Ionicons.refresh));
         }
-        if (state is RemoteArticlesDone) {
-          return _buildArticle(scrollController, state.articles, state.noMoreData);
+        if (state is RemoteTrainersDone) {
+          return _buildArticle(scrollController, state.trainers );
         }
         return const SizedBox();
       },
@@ -64,19 +69,18 @@ class DashboardView extends HookWidget {
 
   Widget _buildArticle(
     ScrollController scrollController,
-    List<Article> articles,
-    bool noMoreData,
+    List<Trainer> trainers
   ) {
     return ListView(
       controller: scrollController,
       children: [
         // Items
         ...List<Widget>.from(
-          articles.map(
+          trainers.map(
             (e) => Builder(
-              builder: (context) => ArticleWidget(
-                article: e,
-                onArticlePressed: (e) => _onArticlePressed(context, e),
+              builder: (context) => TrainerWidget(
+                trainer: e,
+                onTrainerPressed: (e) => _onTrainerPressed(context, e),
               ),
             ),
           ),
@@ -84,14 +88,14 @@ class DashboardView extends HookWidget {
 
         // add Loading (circular progress indicator at the end),
         // if there are more items to be loaded
-        if (noMoreData) ...[
-          const SizedBox(),
-        ] else ...[
+        // if (false) ...[
+        //   const SizedBox(),
+        // ] else ...[
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
             child: CupertinoActivityIndicator(),
           ),
-        ]
+        // ]
       ],
     );
   }
@@ -99,16 +103,16 @@ class DashboardView extends HookWidget {
   void _onScrollListener(BuildContext context, ScrollController scrollController) {
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.position.pixels;
-    final remoteArticleBloc = BlocProvider.of<RemoteArticlesBloc>(context);
-    final state = remoteArticleBloc.blocProcessState;
+    final remoteTrainerBloc = BlocProvider.of<RemoteTrainersBloc>(context);
+    final state = remoteTrainerBloc.blocProcessState;
 
     if (currentScroll == maxScroll && state == BlocProcessState.idle) {
-      remoteArticleBloc.add(const GetArticles());
+      remoteTrainerBloc.add(const GetTrainers());
     }
   }
 
-  void _onArticlePressed(BuildContext context, Article article) {
-    Navigator.pushNamed(context, '/ArticleDetailsView', arguments: article);
+  void _onTrainerPressed(BuildContext context, Trainer trainer) {
+    Navigator.pushNamed(context, '/ArticleDetailsView', arguments: trainer);
   }
 
   void _onShowSavedArticlesViewTapped(BuildContext context) {

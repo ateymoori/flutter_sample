@@ -23,14 +23,14 @@ class TrainersRepositoryImpl implements TrainersRepository {
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data);
       }
-      return DataFailed(
-        DioError(
-          error: httpResponse.response.statusMessage,
-          response: httpResponse.response,
-          request: httpResponse.response.request,
-          type: DioErrorType.RESPONSE,
-        ),
-      );
+      // return DataFailed(
+      //   DioError(
+      //     error: httpResponse.response.statusMessage,
+      //     response: httpResponse.response,
+      //     request: httpResponse.response.request,
+      //     type: DioErrorType.RESPONSE,
+      //   ),
+      // );
     } on DioError catch (e) {
       return DataFailed(e);
     }

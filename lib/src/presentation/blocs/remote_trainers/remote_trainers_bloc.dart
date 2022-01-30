@@ -30,8 +30,8 @@ class RemoteTrainersBloc extends BlocWithState<RemoteTrainersEvent, RemoteTraine
       final dataState = await _getTrainersUseCase(params: TrainersRequestParams( ));
 
       if (dataState is DataSuccess && dataState.data.isNotEmpty) {
-        final articles = dataState.data;
-        _trainers.addAll(articles);
+        final trainers = dataState.data;
+        _trainers.addAll(trainers);
 
         yield RemoteTrainersDone(_trainers);
       }

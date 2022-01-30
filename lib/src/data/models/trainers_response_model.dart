@@ -4,14 +4,17 @@ import 'article_model.dart';
 
 class TrainerResponseModel extends Trainer {
   final String email;
+  final String picture;
 
   TrainerResponseModel({
-    this.email
+    this.email,
+    this.picture
   });
 
   factory TrainerResponseModel.fromJson(Map<String, dynamic> json) {
 
     return TrainerResponseModel(
+      picture: json['email'] as String,
       email: json['email'] as String,
       // totalResults: json['totalResults'] as int,
       // articles: List<ArticleModel>.from(

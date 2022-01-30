@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/article.dart';
+import '../../domain/entities/trainer.dart';
 import '../../presentation/views/trainer_details_view.dart';
 import '../../presentation/views/dashboard_view.dart';
 
