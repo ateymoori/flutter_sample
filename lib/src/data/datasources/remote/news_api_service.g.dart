@@ -1,20 +1,11 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'news_api_service.dart';
-
-// **************************************************************************
-// RetrofitGenerator
-// **************************************************************************
-
 class _NewsApiService implements RestApiService {
   _NewsApiService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    //baseUrl ??= 'https://newsapi.org/v2';
     baseUrl ??= 'https://5fb52c64e473ab0016a179a0.mockapi.io/api';
   }
 
   final Dio _dio;
-
   String baseUrl;
 
   @override
@@ -45,22 +36,12 @@ class _NewsApiService implements RestApiService {
 
   @override
   Future<HttpResponse<List<TrainerResponseModel>>> getTrainersList() async {
-    // final _result = await _dio.request<Map<String, dynamic>>('/v1/employee/employee',
-    //     queryParameters: null,
-    //     options: RequestOptions(
-    //         method: 'GET',
-    //         baseUrl:baseUrl));
-
-    Response response = await _dio.get("https://5fb52c64e473ab0016a179a0.mockapi.io/api/v1/employee/employee");
+    Response response = await _dio.get(
+        "/v1/employee/employee",
+        options: RequestOptions(baseUrl: baseUrl));
     final trainers = (response.data as List)
         .map((x) => TrainerResponseModel.fromJson(x))
         .toList();
-
-    // final trainers = List<TrainerResponseModel>.from(
-    //   (_result.data as List<dynamic>).map(
-    //     (e) => TrainerResponseModel.fromJson(e as Map<String, dynamic>),
-    //   ),
-    // );
 
     final httpResponse = HttpResponse(trainers, response);
     return httpResponse;

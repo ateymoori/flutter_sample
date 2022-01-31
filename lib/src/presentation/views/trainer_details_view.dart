@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lepaya_app/src/domain/entities/trainer.dart';
+import 'package:lepaya_app/src/presentation/blocs/remote_trainers/remote_trainers_bloc.dart';
 
 import '../../domain/entities/article.dart';
 import '../../injector.dart';
 import '../blocs/remote_articles/remote_articles_bloc.dart';
 
 class TrainerDetailsView extends HookWidget {
-  final Article article;
+  final Trainer trainer;
 
-  const TrainerDetailsView({Key key, this.article}) : super(key: key);
+  const TrainerDetailsView({Key key, this.trainer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => injector<RemoteArticlesBloc>(),
+      create: (_) => injector<RemoteTrainersBloc>(),
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
-        floatingActionButton: _buildFloatingActionButton(),
       ),
     );
   }
@@ -40,15 +41,15 @@ class TrainerDetailsView extends HookWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildArticleTitleAndDate(),
-          _buildArticleImage(),
-          _buildArticleDescription(),
+          _buildTrainerTitleAndDate(),
+          _buildTrainerImage(),
+          _buildTrainerDescription(),
         ],
       ),
     );
   }
 
-  Widget _buildArticleTitleAndDate() {
+  Widget _buildTrainerTitleAndDate() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Column(
@@ -56,7 +57,7 @@ class TrainerDetailsView extends HookWidget {
         children: [
           // Title
           Text(
-            article.title,
+            trainer.name.first + ' ' + trainer.name.last,
             style: const TextStyle(fontFamily: 'Butler', fontSize: 20, fontWeight: FontWeight.w900),
           ),
 
@@ -67,7 +68,7 @@ class TrainerDetailsView extends HookWidget {
               const Icon(Ionicons.time_outline, size: 16),
               const SizedBox(width: 4),
               Text(
-                article.publishedAt,
+                trainer.email,
                 style: const TextStyle(fontSize: 12),
               ),
             ],
@@ -77,39 +78,29 @@ class TrainerDetailsView extends HookWidget {
     );
   }
 
-  Widget _buildArticleImage() {
+  Widget _buildTrainerImage() {
     return Container(
       width: double.maxFinite,
       height: 250,
       margin: const EdgeInsets.only(top: 14),
-      child: Image.network(article.urlToImage, fit: BoxFit.cover),
+      child: Image.network(trainer.picture, fit: BoxFit.cover),
     );
   }
 
-  Widget _buildArticleDescription() {
+  Widget _buildTrainerDescription() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
       child: Text(
-        '${article.description ?? ''}\n\n${article.content ?? ''}',
+        '${trainer.picture ?? ''}\n\n${trainer.email ?? ''}',
         style: const TextStyle(fontSize: 16),
       ),
     );
   }
 
-  Widget _buildFloatingActionButton() {
-    return Builder(
-      builder: (context) => FloatingActionButton(
-        onPressed: () => _onFloatingActionButtonPressed(context),
-        child: const Icon(Ionicons.bookmark, color: Colors.white),
-      ),
-    );
-  }
 
   void _onBackButtonTapped(BuildContext context) {
     Navigator.pop(context);
   }
 
-  void _onFloatingActionButtonPressed(BuildContext context) {
 
-  }
 }

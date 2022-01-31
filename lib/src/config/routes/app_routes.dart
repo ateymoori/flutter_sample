@@ -12,8 +12,8 @@ mixin AppRoutes {
         return _materialRoute(const DashboardView());
         break;
 
-      case '/ArticleDetailsView':
-        return _materialRoute(TrainerDetailsView(article: settings.arguments as Article));
+      case '/TrainerDetailsView':
+        return _materialRoute(TrainerDetailsView(trainer: settings.arguments as Trainer));
         break;
 
 
