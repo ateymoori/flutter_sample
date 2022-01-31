@@ -16,7 +16,7 @@ class RemoteTrainersLoading extends RemoteTrainersState {
 }
 
 class RemoteTrainersDone extends RemoteTrainersState {
-  const RemoteTrainersDone(List<Trainer> trainer, {bool noMoreData}) : super(trainers: trainer );
+  const RemoteTrainersDone(List<Trainer> trainer) : super(trainers: trainer );
 }
 
 class RemoteTrainersError extends RemoteTrainersState {

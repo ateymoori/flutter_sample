@@ -111,7 +111,6 @@ class TrainerDetailsView extends HookWidget {
             Text(trainer.favoriteFruit, style: _detailsStyle()),
           ]),
           Row(children: [
-            // Text("About : ", style: _titleStyle()),
             Expanded(
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

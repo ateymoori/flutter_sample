@@ -23,8 +23,8 @@ class TrainersRepositoryImpl implements TrainersRepository {
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          request: httpResponse.response.request,
-          type: DioErrorType.RESPONSE,
+         // request: httpResponse.response.,
+          type: DioErrorType.response,
         ),
       );
     } on DioError catch (e) {
