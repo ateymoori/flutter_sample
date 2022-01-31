@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:lepaya_app/src/domain/entities/trainer.dart';
 import 'names_response_model.dart';
-
 
 class TrainerResponseModel extends Trainer {
   final String email;
@@ -25,7 +21,7 @@ class TrainerResponseModel extends Trainer {
   });
 
   factory TrainerResponseModel.fromJson(Map<String, dynamic> json) {
-    var tagsJson = ["aaa","bbbb"];
+    List<String> tags = List.from(json['tags']) ;
 
     return TrainerResponseModel(
       picture: json['picture'] as String,
@@ -34,7 +30,7 @@ class TrainerResponseModel extends Trainer {
       favoriteFruit: json['favoriteFruit'] as String,
       about: json['about'] as String,
       isAvailable: json['isAvailable'] as bool,
-      tags: tagsJson
+      tags: tags
     );
   }
 
