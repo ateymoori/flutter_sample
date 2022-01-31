@@ -9,32 +9,6 @@ class _NewsApiService implements RestApiService {
   String baseUrl;
 
   @override
-  Future<HttpResponse<BreakingNewsResponseModel>> getBreakingNewsArticles(
-      {apiKey, country, category, page, pageSize}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'apiKey': apiKey,
-      r'country': country,
-      r'category': category,
-      r'page': page,
-      r'pageSize': pageSize
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    final _result = await _dio.request<Map<String, dynamic>>('/top-headlines',
-        queryParameters: queryParameters,
-        options: RequestOptions(
-            method: 'GET',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
-        data: _data);
-    final value = BreakingNewsResponseModel.fromJson(_result.data);
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
   Future<HttpResponse<List<TrainerResponseModel>>> getTrainersList() async {
     Response response = await _dio.get(
         "/v1/employee/employee",

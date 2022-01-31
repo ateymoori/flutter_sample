@@ -1,7 +1,5 @@
 part of 'remote_trainers_bloc.dart';
 
-
-
 abstract class RemoteTrainersState extends Equatable {
   final List<Trainer> trainers;
 

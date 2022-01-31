@@ -3,11 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:lepaya_app/src/domain/entities/trainer.dart';
 import 'package:lepaya_app/src/domain/repositories/trainers_repository.dart';
-
-import '../../core/params/article_request.dart';
 import '../../core/resources/data_state.dart';
-import '../../domain/entities/article.dart';
-import '../../domain/repositories/articles_repository.dart';
 import '../datasources/remote/news_api_service.dart';
 
 class TrainersRepositoryImpl implements TrainersRepository {

@@ -31,9 +31,9 @@ class DashboardView extends HookWidget {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade100,
       elevation: 4.0,
-      title: const Text('Trainers List', style: TextStyle(color: Colors.black)),
+      title: const Text('Lepaya', style: TextStyle(color: Colors.black)),
     );
   }
 
@@ -47,14 +47,14 @@ class DashboardView extends HookWidget {
           return const Center(child: Icon(Ionicons.refresh));
         }
         if (state is RemoteTrainersDone) {
-          return _buildArticle(scrollController, state.trainers);
+          return _buildTrainer(scrollController, state.trainers);
         }
         return const SizedBox();
       },
     );
   }
 
-  Widget _buildArticle(
+  Widget _buildTrainer(
       ScrollController scrollController, List<Trainer> trainers) {
     return ListView(
       controller: scrollController,

@@ -1,13 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lepaya_app/src/domain/entities/trainer.dart';
 import 'package:lepaya_app/src/presentation/blocs/remote_trainers/remote_trainers_bloc.dart';
-
-import '../../domain/entities/article.dart';
 import '../../injector.dart';
-import '../blocs/remote_articles/remote_articles_bloc.dart';
 
 class TrainerDetailsView extends HookWidget {
   final Trainer trainer;
@@ -27,6 +25,21 @@ class TrainerDetailsView extends HookWidget {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.call,
+            color: Colors.green,
+          ),
+          onPressed: () {
+            // do something
+          },
+        )
+      ],
+      backgroundColor: Colors.grey.shade100,
+      elevation: 4.0,
+      title: Text(trainer.name.first + ' ' + trainer.name.last,
+          style: TextStyle(color: Colors.black)),
       leading: Builder(
         builder: (context) => GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -41,9 +54,10 @@ class TrainerDetailsView extends HookWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildTrainerTitleAndDate(),
           _buildTrainerImage(),
+          _buildTrainerTitleAndDate(),
           _buildTrainerDescription(),
+       //   _buildTags(),
         ],
       ),
     );
@@ -58,7 +72,8 @@ class TrainerDetailsView extends HookWidget {
           // Title
           Text(
             trainer.name.first + ' ' + trainer.name.last,
-            style: const TextStyle(fontFamily: 'Butler', fontSize: 20, fontWeight: FontWeight.w900),
+            style: const TextStyle(
+                fontFamily: 'IBM', fontSize: 20, fontWeight: FontWeight.w900),
           ),
 
           const SizedBox(height: 14),
@@ -81,9 +96,9 @@ class TrainerDetailsView extends HookWidget {
   Widget _buildTrainerImage() {
     return Container(
       width: double.maxFinite,
-      height: 250,
-      margin: const EdgeInsets.only(top: 14),
-      child: Image.network(trainer.picture, fit: BoxFit.cover),
+      height: 300,
+      margin: const EdgeInsets.only(top: 1),
+      child: Image.network(trainer.picture, fit: BoxFit.fitHeight),
     );
   }
 
@@ -97,10 +112,36 @@ class TrainerDetailsView extends HookWidget {
     );
   }
 
+  // Widget _buildTags() {
+  //   return ListView(
+  //     // This next line does the trick.
+  //     scrollDirection: Axis.horizontal,
+  //     children: <Widget>[
+  //       Container(
+  //         width: 50.0,
+  //         color: Colors.red,
+  //       ),
+  //       Container(
+  //         width: 60.0,
+  //         color: Colors.blue,
+  //       ),
+  //       Container(
+  //         width: 160.0,
+  //         color: Colors.green,
+  //       ),
+  //       Container(
+  //         width: 160.0,
+  //         color: Colors.yellow,
+  //       ),
+  //       Container(
+  //         width: 160.0,
+  //         color: Colors.orange,
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void _onBackButtonTapped(BuildContext context) {
     Navigator.pop(context);
   }
-
-
 }

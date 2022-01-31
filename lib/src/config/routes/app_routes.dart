@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../domain/entities/article.dart';
 import '../../domain/entities/trainer.dart';
 import '../../presentation/views/trainer_details_view.dart';
 import '../../presentation/views/dashboard_view.dart';
@@ -15,8 +13,6 @@ mixin AppRoutes {
       case '/TrainerDetailsView':
         return _materialRoute(TrainerDetailsView(trainer: settings.arguments as Trainer));
         break;
-
-
       default:
         return null;
     }
