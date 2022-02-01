@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/trainer.dart';
 
@@ -31,11 +32,15 @@ class TrainerWidget extends StatelessWidget {
   Widget _buildImage(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.only(end: 14),
-      child: CircleAvatar(
-        backgroundImage: NetworkImage(trainer?.picture),
-        backgroundColor: Colors.green,
-        radius: 40,
-      ),
+      child: ClipRRect(borderRadius: BorderRadius.circular(10000.0),
+          child: CachedNetworkImage(
+            height:75.0,
+            width: 75.0,
+              fit: BoxFit.cover,
+              imageUrl: trainer.picture,
+              errorWidget: (context, url, error) => new Icon(Icons.error),
+            ),
+          )
     );
   }
 
