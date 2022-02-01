@@ -13,12 +13,11 @@ dependencies:
   cupertino_icons: ^1.0.0
 
   flutter_hooks: ^0.15.0
-  get_it: ^5.0.3
+  get_it: ^7.2.0
   retrofit: ^2.2.0
   floor: ^1.2.0
   flutter_bloc: ^6.1.1
   equatable: ^1.2.5
-
   ionicons: ^0.0.3
   ffi: ^1.0.0
 

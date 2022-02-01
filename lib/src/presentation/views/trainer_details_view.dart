@@ -20,11 +20,11 @@ class TrainerDetailsView extends HookWidget {
   }
 
   TextStyle _titleStyle() {
-    return TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+    return TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
   }
 
   TextStyle _detailsStyle() {
-    return TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
+    return TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
   }
 
   @override
@@ -74,7 +74,7 @@ class TrainerDetailsView extends HookWidget {
             elevation: 10,
             child: Container(
                 padding: const EdgeInsetsDirectional.only(
-                    start: 14, end: 14, bottom: 7, top: 7),
+                    start: 8, end: 8, bottom: 6, top: 6),
                 child: Column(
                   children: [
                     _buildTrainerTitleAndDate(),
@@ -104,26 +104,22 @@ class TrainerDetailsView extends HookWidget {
           ]),
           Row(children: [
             Text("Email : ", style: _titleStyle()),
-            Text(trainer.email, style: _detailsStyle()),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 5.0),
+                    child: Text(trainer.email, style: _detailsStyle()),
+                  ),
+                ],
+              ),
+            )
           ]),
           Row(children: [
             Text("Favorite Fruit : ", style: _titleStyle()),
             Text(trainer.favoriteFruit, style: _detailsStyle()),
           ]),
-          Row(children: [
-            Expanded(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("About : ", style: _titleStyle()),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(trainer.about),
-                  ),
-                ],
-              ),
-            )
-          ])
         ],
       ),
     );
@@ -155,7 +151,7 @@ class TrainerDetailsView extends HookWidget {
           elevation: 4,
           margin: EdgeInsets.all(4),
           child: Padding(
-            padding: EdgeInsets.all( 6.0),
+            padding: EdgeInsets.all(6.0),
             child: Text(trainer.tags[index],
                 style: TextStyle(color: Colors.white, fontSize: 17)),
           )));

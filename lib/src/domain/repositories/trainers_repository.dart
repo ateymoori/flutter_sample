@@ -5,5 +5,4 @@ import '../../core/resources/data_state.dart';
 abstract class TrainersRepository {
   // API methods
   Future<DataState<List<Trainer>>> getTrainersList( );
-
 }

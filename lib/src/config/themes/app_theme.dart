@@ -14,4 +14,17 @@ class AppTheme {
     );
   }
 
+
+  static ThemeData get dark {
+    return ThemeData(
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        color: Colors.black54,
+      ),
+      scaffoldBackgroundColor: Colors.black54,
+      primaryColor: Colors.white,
+      splashColor: Colors.transparent,
+      fontFamily: 'IBM', colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
+    );
+  }
 }

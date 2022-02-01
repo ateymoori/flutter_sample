@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import '../../domain/entities/trainer.dart';
 
 class TrainerWidget extends StatelessWidget {
@@ -70,7 +69,6 @@ class TrainerWidget extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

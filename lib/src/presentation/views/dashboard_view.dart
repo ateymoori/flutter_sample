@@ -15,19 +15,21 @@ class DashboardView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = useScrollController();
+    // final scrollController = useScrollController();
 
-    useEffect(() {
-      scrollController
-          .addListener(() => _onScrollListener(context, scrollController));
-      return scrollController.dispose;
-    }, [scrollController]);
+    // useEffect(() {
+    //   scrollController
+    //       .addListener(() => _onScrollListener(context, scrollController));
+    //   return scrollController.dispose;
+    // },
+    //     [scrollController]);
 
     return Scaffold(
       appBar: _buildAppBar(),
-      body: _buildBody(scrollController),
+      body: _buildBody(),
     );
   }
+
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
@@ -37,7 +39,7 @@ class DashboardView extends HookWidget {
     );
   }
 
-  Widget _buildBody(ScrollController scrollController) {
+  Widget _buildBody( ) {
     return BlocBuilder<RemoteTrainersBloc, RemoteTrainersState>(
       builder: (_, state) {
         if (state is RemoteTrainersLoading) {
@@ -47,17 +49,16 @@ class DashboardView extends HookWidget {
           return const Center(child: Icon(Ionicons.refresh));
         }
         if (state is RemoteTrainersDone) {
-          return _buildTrainer(scrollController, state.trainers);
+          return _buildTrainer( state.trainers);
         }
         return const SizedBox();
       },
     );
   }
 
-  Widget _buildTrainer(
-      ScrollController scrollController, List<Trainer> trainers) {
+  Widget _buildTrainer(  List<Trainer> trainers) {
     return ListView(
-      controller: scrollController,
+      controller:   ScrollController(),
       children: [
         // Items
         ...List<Widget>.from(
@@ -78,17 +79,6 @@ class DashboardView extends HookWidget {
     );
   }
 
-  void _onScrollListener(
-      BuildContext context, ScrollController scrollController) {
-    final maxScroll = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.position.pixels;
-    final remoteTrainerBloc = BlocProvider.of<RemoteTrainersBloc>(context);
-    final state = remoteTrainerBloc.blocProcessState;
-
-    if (currentScroll == maxScroll && state == BlocProcessState.idle) {
-      remoteTrainerBloc.add(const GetTrainers());
-    }
-  }
 
   void _onTrainerPressed(BuildContext context, Trainer trainer) {
     Navigator.pushNamed(context, '/TrainerDetailsView', arguments: trainer);

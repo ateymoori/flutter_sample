@@ -7,24 +7,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:lepaya_app/main.dart';
+import 'package:lepaya_app/src/injector.dart';
+import 'package:lepaya_app/src/presentation/blocs/remote_trainers/remote_trainers_bloc.dart';
+import 'package:lepaya_app/src/presentation/views/dashboard_view.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-   // await tester.pumpWidget(const MyApp());
+  testWidgets('home page is created', (WidgetTester tester) async {
+    await initializeDependencies();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final testWidget = MaterialApp(
+      home: MyApp(),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpWidget(testWidget);
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Lepaya'), findsOneWidget);
   });
 }

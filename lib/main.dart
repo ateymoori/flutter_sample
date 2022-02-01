@@ -11,7 +11,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initializeDependencies();
-
   runApp(MyApp());
 }
 
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
         title: kMaterialAppTitle,
         onGenerateRoute: AppRoutes.onGenerateRoutes,
         theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
       ),
     );
   }

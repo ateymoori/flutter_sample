@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
 import 'package:lepaya_app/src/data/models/names_response_model.dart';
 
