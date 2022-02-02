@@ -3,18 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_test_utils/image_test_utils.dart';
 
 import 'package:lepaya_app/main.dart';
 import 'package:lepaya_app/src/data/models/names_response_model.dart';
 import 'package:lepaya_app/src/domain/entities/trainer.dart';
 import 'package:lepaya_app/src/injector.dart';
-import 'package:lepaya_app/src/presentation/blocs/remote_trainers/remote_trainers_bloc.dart';
-import 'package:lepaya_app/src/presentation/views/dashboard_view.dart';
 import 'package:lepaya_app/src/presentation/views/trainer_details_view.dart';
 import 'package:lepaya_app/src/presentation/widgets/trainer_widget.dart';
 
 void main() {
+
+  //SAMPLE DATA
   Trainer trainer = Trainer(
       isAvailable: true,
       email: "test@test.com",
@@ -24,7 +23,8 @@ void main() {
           "https://upload.wikimedia.org/wikipedia/commons/f/f7/Henry_Winkler_Fonzie_1977.JPG",
       name: NameResponseModel(first: "AmirHossein", last: "Teymoori"));
 
-  testWidgets('home page is created', (WidgetTester tester) async {
+
+  testWidgets('Home page is created', (WidgetTester tester) async {
     await initializeDependencies();
 
     final testWidget = MaterialApp(
@@ -50,12 +50,11 @@ void main() {
     await tester.pumpWidget(testWidget);
     await tester.pumpAndSettle();
 
-    expect(find.text('test@test.com'), findsOneWidget);
+    expect(find.text(trainer.email), findsOneWidget);
   });
 
 
-
-  testWidgets('trainer widget', (WidgetTester tester) async {
+  testWidgets('trainer widget is created and data loaded from API and filled in the widget', (WidgetTester tester) async {
     if (GetIt.instance == null) {
       await initializeDependencies();
     }
@@ -67,6 +66,6 @@ void main() {
     await tester.pumpWidget(testWidget);
     await tester.pumpAndSettle();
 
-    expect(find.text('test@test.com'), findsOneWidget);
+    expect(find.text(trainer.email), findsOneWidget);
   });
 }

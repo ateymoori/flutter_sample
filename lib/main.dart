@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<RemoteTrainersBloc>(
       create: (_) => injector()..add(const GetTrainers()),
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         title: kMaterialAppTitle,
         onGenerateRoute: AppRoutes.onGenerateRoutes,
         theme: AppTheme.light,
